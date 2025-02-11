@@ -1,0 +1,2 @@
+# Django_Pictures_Management
+Django_Pictures_Management
