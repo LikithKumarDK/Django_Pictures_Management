@@ -3,12 +3,13 @@
   "version": "3.8.0",
   "description": "",
   "scripts": {
-    "start": "npm run dev",
-    "build": "npm run build:clean && npm run build:tailwind",
+    "start": "npm run dev && npm run terser",
+    "build": "npm run build:clean && npm run build:tailwind && npm run terser",
     "build:clean": "rimraf ../static/css/dist",
-    "build:tailwind": "cross-env NODE_ENV=production tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css --minify",
-    "dev": "cross-env NODE_ENV=development tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css -w",
-    "tailwindcss": "node ./node_modules/tailwindcss/lib/cli.js"
+    "build:tailwind": "cross-env NODE_ENV=production tailwindcss --postcss -i ./src/css/styles.css -o ../static/css/dist/styles.css --minify",
+    "dev": "cross-env NODE_ENV=development tailwindcss --postcss -i ./src/css/styles.css -o ../static/css/dist/styles.css -w",
+    "tailwindcss": "node ./node_modules/tailwindcss/lib/cli.js",
+    "terser": "mkdir -p ../static/js/dist && for file in ./src/js/*.js; do terser \"$file\" -o \"../static/js/dist/$(basename \"$file\" .js).min.js\" --compress --mangle; done"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +25,8 @@
     "postcss-simple-vars": "^7.0.1",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "terser": "^5.38.2"
   }
 }
