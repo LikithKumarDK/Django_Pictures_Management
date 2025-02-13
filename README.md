@@ -1,2 +1,2 @@
 # Django_Pictures_Management
-Django_Pictures_Managements
+Django_Pictures_Management
